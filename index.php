@@ -29,9 +29,9 @@ function update_rele($link, $id) {
 }
 function add_command($link, $id) {
     if(isset($_POST['button_on'])) {
-        $status = 'rele_on';
+        $status = '1';
     } 
-    else $status = 'rele_off';
+    else $status = '0';
     $date_today = date("Y-m-d H:i:s");
     $query = "INSERT device_action SET DEVICE_ID = '$id', COMMAND = '$status', DATE_TIME='$date_today'";
     $result = mysqli_query($link, $query);
@@ -120,6 +120,17 @@ if (mysqli_num_rows($result) == 1) { //Если в БД есть данные о
     $out_state_dt = '?';
 }
 
+$query = "SELECT * FROM out_state_table WHERE DEVICE_ID = '$id'";
+$result = mysqli_query($link, $query);
+if (mysqli_num_rows($result) == 1) { //Если в БД есть данные о реле для этого устройства
+    $Arr = mysqli_fetch_array($result);
+    $action = $Arr['flag'];
+} else { //Если в БД нет данных о реле для этого устройства
+    $action = '?';  
+}
+if($action ==  1){
+    $warning = 'Частое обращение';
+} else {$warning = '';}
 //----------------------------------------------------------------------------------------
 
 
@@ -150,6 +161,11 @@ echo '
 </td>
 <td width=150px> ' . $out_state_dt . '
 </td>
+</tr>
+<td width=100px> Поведение
+</td>
+<td width=150px>' . $warning . '
+
 </tr>
 </table>
 
