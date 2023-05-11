@@ -2,9 +2,9 @@
 
 //--------------------------Настройки подключения к БД-----------------------
 $db_host = 'std-mysql.ist.mospolytech.ru';
-$db_user = 'std_2017_iot'; //имя пользователя совпадает с именем БД
-$db_password = 'Artem080303'; //пароль, указанный при создании БД
-$database = 'std_2017_iot'; //имя БД, которое было указано при создании
+$db_user = 'std_1989_iot'; //имя пользователя совпадает с именем БД
+$db_password = '12345678'; //пароль, указанный при создании БД
+$database = 'std_1989_iot'; //имя БД, которое было указано при создании
 $link = mysqli_connect($db_host, $db_user, $db_password, $database);
 if ($link == False) {
     die("Cannot connect DB");
